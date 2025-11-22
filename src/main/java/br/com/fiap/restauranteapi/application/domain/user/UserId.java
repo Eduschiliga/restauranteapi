@@ -1,15 +1,19 @@
-package com.sonnesen.productsapi.application.domain.category;
+package br.com.fiap.restauranteapi.application.domain.user;
 
 import java.util.UUID;
 
-public record CategoryId(String value) {
+public record UserId(String value) {
 
-    public static CategoryId from(final String value) {
+    public static UserId from(final String value) {
         try {
-            return new CategoryId(UUID.fromString(value).toString());
+            return new UserId(UUID.fromString(value).toString());
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Invalid category id");
+            throw new IllegalArgumentException("Invalid User Id");
         }
+    }
+
+    public static UserId generate() {
+        return new UserId(UUID.randomUUID().toString());
     }
 
     @Override

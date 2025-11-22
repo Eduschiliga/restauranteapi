@@ -1,15 +1,19 @@
-package br.com.fiap.restauranteapi.application.domain.user;
+package br.com.fiap.restauranteapi.application.domain.address;
 
 import java.util.UUID;
 
-public record UserId(String value) {
+public record AddressId(String value) {
 
-    public static UserId from(final String value) {
+    public static AddressId from(final String value) {
         try {
-            return new UserId(UUID.fromString(value).toString());
+            return new AddressId(UUID.fromString(value).toString());
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Invalid category id");
+            throw new IllegalArgumentException("Invalid Address Id");
         }
+    }
+
+    public static AddressId generate() {
+        return new AddressId(UUID.randomUUID().toString());
     }
 
     @Override

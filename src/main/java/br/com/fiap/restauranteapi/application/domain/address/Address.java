@@ -1,9 +1,9 @@
-package br.com.fiap.restauranteapi.application.domain;
+package br.com.fiap.restauranteapi.application.domain.address;
 
 import java.time.LocalDateTime;
 
 public class Address {
-    private String addressId;
+    private AddressId addressId;
     private String street;
     private String number;
     private String complement;
@@ -17,7 +17,7 @@ public class Address {
     private LocalDateTime deletedAt;
 
     public Address(
-            String addressId,
+            AddressId addressId,
             String street,
             String number,
             String complement,
@@ -53,7 +53,7 @@ public class Address {
         LocalDateTime now = LocalDateTime.now();
 
         return new Address(
-                null,
+                AddressId.generate(),
                 street,
                 number,
                 complement,
@@ -106,7 +106,7 @@ public class Address {
         this.active = false;
     }
 
-    public String getAddressId() {
+    public AddressId getAddressId() {
         return addressId;
     }
 

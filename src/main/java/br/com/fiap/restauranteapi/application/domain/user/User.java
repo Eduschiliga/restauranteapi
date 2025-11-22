@@ -1,9 +1,11 @@
-package br.com.fiap.restauranteapi.application.domain;
+package br.com.fiap.restauranteapi.application.domain.user;
+
+import br.com.fiap.restauranteapi.application.domain.address.Address;
 
 import java.time.LocalDateTime;
 
 public class User {
-    private String userId;
+    private UserId userId;
     private String name;
     private String email;
     private String login;
@@ -15,7 +17,7 @@ public class User {
     private LocalDateTime deletedAt;
 
     public User(
-            String userId,
+            UserId userId,
             String name,
             String email,
             String login,
@@ -48,7 +50,7 @@ public class User {
         LocalDateTime now = LocalDateTime.now();
 
         return new User(
-                null,
+                UserId.generate(),
                 name,
                 email,
                 login,
@@ -79,7 +81,7 @@ public class User {
         this.email = email;
         this.login = login;
         this.password = password;
-        this.address = this.address.update(address.getStreet(), address.getNumber(), address.getComplement(), address.getCity(), address.getState(), address.getZipCode(), address.getActive());
+        this.address = address;
         this.updatedAt = LocalDateTime.now();
 
         return this;
@@ -97,7 +99,7 @@ public class User {
         this.active = false;
     }
 
-    public String getUserId() {
+    public UserId getUserId() {
         return userId;
     }
 
