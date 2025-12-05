@@ -1,38 +1,35 @@
-package br.com.fiap.restauranteapi.application.ports.inbound.update;
+package br.com.fiap.restauranteapi.application.ports.inbound.create.user;
 
-import br.com.fiap.restauranteapi.application.domain.address.Address;
 import br.com.fiap.restauranteapi.application.domain.user.User;
 import br.com.fiap.restauranteapi.application.domain.user.UserId;
-import br.com.fiap.restauranteapi.application.ports.inbound.get.GetUserByIdOutput;
+import br.com.fiap.restauranteapi.application.ports.inbound.create.address.CreateAddressOutput;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
 
-public record UpdateUserOutput(
+public record CreateUserOutput(
         UserId userId,
         String name,
-        String login,
         String email,
+        String login,
         String password,
-        Address address,
+        CreateAddressOutput address,
         Boolean active,
         LocalDateTime createdAt,
         LocalDateTime updatedAt,
         LocalDateTime deletedAt
 ) {
-    public static UpdateUserOutput from(User user) {
-        return new UpdateUserOutput(
+    public static CreateUserOutput from(User user) {
+        return new CreateUserOutput(
                 user.getUserId(),
                 user.getName(),
                 user.getEmail(),
                 user.getLogin(),
                 user.getPassword(),
-                user.getAddress(),
+                user.getAddress() != null ?CreateAddressOutput.from(user.getAddress()) : null,
                 user.getActive(),
                 user.getCreatedAt(),
                 user.getUpdatedAt(),
                 user.getDeletedAt()
         );
     }
-
 }

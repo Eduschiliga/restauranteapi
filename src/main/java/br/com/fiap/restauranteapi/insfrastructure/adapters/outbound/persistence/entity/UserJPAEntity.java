@@ -111,7 +111,7 @@ public class UserJPAEntity {
                 email,
                 login,
                 password,
-                address.toAddress(),
+                address != null ? address.toAddress() : null,
                 active,
                 createdAt,
                 updatedAt,

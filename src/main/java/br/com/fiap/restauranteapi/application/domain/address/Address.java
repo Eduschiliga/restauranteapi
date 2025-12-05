@@ -70,7 +70,6 @@ public class Address {
         );
     }
 
-
     public static Address newAddress(
             String street,
             String number,

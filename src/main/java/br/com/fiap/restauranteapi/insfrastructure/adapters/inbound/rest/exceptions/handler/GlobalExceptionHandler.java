@@ -23,7 +23,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = {Exception.class})
     protected ResponseEntity<Object> handleGeneralException(final RuntimeException ex, final WebRequest request) {
         return handleExceptionInternal(ex,
-                "An unexpected error occurred",
+                ex.getMessage(),
                 new HttpHeaders(),
                 HttpStatus.INTERNAL_SERVER_ERROR, request);
     }

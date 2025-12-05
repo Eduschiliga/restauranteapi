@@ -84,6 +84,8 @@ public class AddressJPAEntity {
     }
 
     public static AddressJPAEntity of(final Address address) {
+        if (address == null) return null;
+
         return new AddressJPAEntity(
                 address.getAddressId() != null ? address.getAddressId().value() : null,
                 address.getStreet(),

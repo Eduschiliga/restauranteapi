@@ -1,4 +1,4 @@
-package br.com.fiap.restauranteapi.application.ports.inbound.create;
+package br.com.fiap.restauranteapi.application.ports.inbound.update.user;
 
 import br.com.fiap.restauranteapi.application.domain.address.Address;
 import br.com.fiap.restauranteapi.application.domain.user.User;
@@ -6,11 +6,11 @@ import br.com.fiap.restauranteapi.application.domain.user.UserId;
 
 import java.time.LocalDateTime;
 
-public record CreateUserOutput(
+public record UpdateUserOutput(
         UserId userId,
         String name,
-        String email,
         String login,
+        String email,
         String password,
         Address address,
         Boolean active,
@@ -18,8 +18,8 @@ public record CreateUserOutput(
         LocalDateTime updatedAt,
         LocalDateTime deletedAt
 ) {
-    public static CreateUserOutput from(User user) {
-        return new CreateUserOutput(
+    public static UpdateUserOutput from(User user) {
+        return new UpdateUserOutput(
                 user.getUserId(),
                 user.getName(),
                 user.getEmail(),
@@ -32,4 +32,5 @@ public record CreateUserOutput(
                 user.getDeletedAt()
         );
     }
+
 }

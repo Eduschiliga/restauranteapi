@@ -2,16 +2,28 @@ package br.com.fiap.restauranteapi.insfrastructure.adapters.inbound.rest.mapper;
 
 import br.com.fiap.restauranteapi.application.domain.address.AddressId;
 import br.com.fiap.restauranteapi.application.domain.user.UserId;
-import br.com.fiap.restauranteapi.application.ports.inbound.create.CreateUserInput;
-import br.com.fiap.restauranteapi.application.ports.inbound.create.CreateUserOutput;
+import br.com.fiap.restauranteapi.application.ports.inbound.create.user.CreateUserInput;
+import br.com.fiap.restauranteapi.application.ports.inbound.create.user.CreateUserOutput;
+import br.com.fiap.restauranteapi.application.ports.inbound.get.GetUserByIdOutput;
+import br.com.fiap.restauranteapi.application.ports.inbound.list.ListUserOutput;
+import br.com.fiap.restauranteapi.application.ports.inbound.update.user.UpdateUserInput;
+import br.com.fiap.restauranteapi.application.ports.inbound.update.user.UpdateUserOutput;
 import br.com.fiap.restauranteapi.insfrastructure.adapters.inbound.rest.model.dto.UserDTO;
+import br.com.fiap.restauranteapi.insfrastructure.adapters.inbound.rest.model.dto.create.CreateUserDTO;
+import br.com.fiap.restauranteapi.insfrastructure.adapters.inbound.rest.model.dto.update.UpdateUserDTO;
 import org.mapstruct.Mapper;
+
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
     UserDTO toDTO(CreateUserOutput output);
+    UserDTO toDTO(UpdateUserOutput output);
+    UserDTO toDTO(GetUserByIdOutput output);
+    List<UserDTO> toDTO(List<ListUserOutput> output);
 
-    CreateUserInput fromDTO(UserDTO dto);
+    CreateUserInput fromDTO(CreateUserDTO dto);
+    UpdateUserInput fromUpdateDTO(UpdateUserDTO dto);
 
     default String map(UserId value) {
         return value != null ? value.toString() : null;
