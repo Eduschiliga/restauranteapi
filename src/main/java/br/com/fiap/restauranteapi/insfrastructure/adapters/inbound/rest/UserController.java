@@ -1,17 +1,13 @@
 package br.com.fiap.restauranteapi.insfrastructure.adapters.inbound.rest;
 
-import br.com.fiap.restauranteapi.application.domain.user.User;
-import br.com.fiap.restauranteapi.application.ports.inbound.auth.ForAuthenticatingUser;
-import br.com.fiap.restauranteapi.application.ports.inbound.auth.ForGettingUserByToken;
-import br.com.fiap.restauranteapi.application.ports.inbound.auth.GetUserByTokenOutput;
+import br.com.fiap.restauranteapi.application.ports.inbound.create.ForCreatingUser;
 import br.com.fiap.restauranteapi.application.ports.inbound.create.user.CreateUserInput;
 import br.com.fiap.restauranteapi.application.ports.inbound.create.user.CreateUserOutput;
-import br.com.fiap.restauranteapi.application.ports.inbound.create.ForCreatingUser;
 import br.com.fiap.restauranteapi.application.ports.inbound.delete.ForDeletingUserById;
 import br.com.fiap.restauranteapi.application.ports.inbound.get.ForGettingUserById;
 import br.com.fiap.restauranteapi.application.ports.inbound.get.GetUserByIdOutput;
-import br.com.fiap.restauranteapi.application.ports.inbound.list.ForListingUsersByName;
 import br.com.fiap.restauranteapi.application.ports.inbound.list.ForListingUser;
+import br.com.fiap.restauranteapi.application.ports.inbound.list.ForListingUsersByName;
 import br.com.fiap.restauranteapi.application.ports.inbound.list.ListUserOutput;
 import br.com.fiap.restauranteapi.application.ports.inbound.list.ListUsersByNameOutput;
 import br.com.fiap.restauranteapi.application.ports.inbound.password.ForUpdatingPassword;
@@ -25,9 +21,11 @@ import br.com.fiap.restauranteapi.insfrastructure.adapters.inbound.rest.model.dt
 import br.com.fiap.restauranteapi.insfrastructure.adapters.inbound.rest.model.dto.create.CreateUserDTO;
 import br.com.fiap.restauranteapi.insfrastructure.adapters.inbound.rest.model.dto.update.UpdatePasswordDTO;
 import br.com.fiap.restauranteapi.insfrastructure.adapters.inbound.rest.model.dto.update.UpdateUserDTO;
+import br.com.fiap.restauranteapi.insfrastructure.adapters.inbound.rest.security.model.CustomUserDetails;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -43,7 +41,6 @@ public class UserController {
     private final ForListingUser forListingUser;
     private final ForListingUsersByName forListingsUsersByName;
     private final ForGettingUserById forGettingUserById;
-    private final ForGettingUserByToken forAuthenticatingUser;
     private final ForUpdatingPassword forUpdatingPassword;
 
     private final UserMapper userMapper;
@@ -56,7 +53,6 @@ public class UserController {
             ForGettingUserById forGettingUserById,
             ForListingUsersByName forListingsUsersByName,
             ForUpdatingPassword forUpdatingPassword,
-            ForGettingUserByToken forAuthenticatingUser,
             UserMapper userMapper
     ) {
         this.forCreatingUser = forCreatingUser;
@@ -66,7 +62,6 @@ public class UserController {
         this.forGettingUserById = forGettingUserById;
         this.forListingsUsersByName = forListingsUsersByName;
         this.forUpdatingPassword = forUpdatingPassword;
-        this.forAuthenticatingUser = forAuthenticatingUser;
         this.userMapper = userMapper;
     }
 
@@ -114,7 +109,7 @@ public class UserController {
 
     @GetMapping("search")
     public ResponseEntity<List<UserDTO>> listUsersByName(
-            @RequestParam(required = true) @NotNull @NotBlank String name
+            @RequestParam @NotNull @NotBlank String name
     ) {
         List<ListUsersByNameOutput> userOutputList = forListingsUsersByName.findAllByName(name);
         List<UserDTO> userList = userMapper.toListDTO(userOutputList);
@@ -125,10 +120,9 @@ public class UserController {
     @PatchMapping("password")
     public ResponseEntity<UserDTO> updatePassword(
             @RequestBody UpdatePasswordDTO updatePasswordDto,
-            @RequestHeader("Authorization") String jwtToken
+            @AuthenticationPrincipal CustomUserDetails userDetails
     ) {
-        GetUserByTokenOutput user = forAuthenticatingUser.getUserByToken(jwtToken);
-        UpdatePasswordInput useCaseInput = userMapper.fromUpdatePasswordDTO(updatePasswordDto, user);
+        UpdatePasswordInput useCaseInput = userMapper.fromUpdatePasswordDTO(updatePasswordDto, userDetails.getUser());
         UpdatePasswordOutput useCaseOutput = forUpdatingPassword.updatePassword(useCaseInput);
 
         return ResponseEntity.ok(userMapper.toDTO(useCaseOutput));

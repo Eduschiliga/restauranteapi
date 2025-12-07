@@ -1,6 +1,7 @@
 package br.com.fiap.restauranteapi.application.domain.user;
 
 import br.com.fiap.restauranteapi.application.domain.address.Address;
+import org.mapstruct.control.MappingControl;
 
 import java.time.LocalDateTime;
 
@@ -11,6 +12,7 @@ public class User {
     private String login;
     private String password;
     private Address address;
+    private UserType userType;
     private Boolean active;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -23,6 +25,7 @@ public class User {
             String login,
             String password,
             Address address,
+            UserType userType,
             Boolean active,
             LocalDateTime createdAt,
             LocalDateTime updatedAt,
@@ -34,6 +37,7 @@ public class User {
         this.login = login;
         this.password = password;
         this.address = address;
+        this.userType = userType;
         this.active = active;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -47,6 +51,7 @@ public class User {
             String login,
             String password,
             Address address,
+            UserType userType,
             Boolean active,
             LocalDateTime createdAt,
             LocalDateTime updatedAt,
@@ -59,6 +64,7 @@ public class User {
                 login,
                 password,
                 address,
+                userType,
                 active,
                 createdAt,
                 updatedAt,
@@ -71,7 +77,8 @@ public class User {
             String email,
             String login,
             String password,
-            Address address
+            Address address,
+            UserType userType
     ) {
         LocalDateTime now = LocalDateTime.now();
 
@@ -82,6 +89,7 @@ public class User {
                 login,
                 password,
                 address,
+                userType,
                 true,
                 now,
                 now,
@@ -169,5 +177,9 @@ public class User {
 
     public LocalDateTime getDeletedAt() {
         return deletedAt;
+    }
+
+    public UserType getUserType() {
+        return userType;
     }
 }

@@ -35,16 +35,12 @@ public class JwtTokenAdapter implements TokenGateway {
 
     @Override
     public String getSubjectByToken(String token) {
-        try {
-            Algorithm algorithm = Algorithm.HMAC256(secret);
-            return JWT.require(algorithm)
-                    .withIssuer("restaurante-api")
-                    .build()
-                    .verify(token)
-                    .getSubject();
-        } catch (JWTVerificationException exception) {
-            return "";
-        }
+        Algorithm algorithm = Algorithm.HMAC256(secret);
+        return JWT.require(algorithm)
+                .withIssuer("restaurante-api")
+                .build()
+                .verify(token)
+                .getSubject();
     }
 
     private Instant genExpirationDate() {

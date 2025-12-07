@@ -1,5 +1,7 @@
 package br.com.fiap.restauranteapi.insfrastructure.adapters.inbound.rest.model.dto;
 
+import br.com.fiap.restauranteapi.application.domain.user.UserType;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
@@ -12,6 +14,7 @@ public class UserDTO {
     private String password;
     private AddressDTO address;
     private Boolean active;
+    private UserType userType;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime deletedAt;
@@ -24,6 +27,7 @@ public class UserDTO {
             String password,
             AddressDTO address,
             Boolean active,
+            UserType userType,
             LocalDateTime createdAt,
             LocalDateTime updatedAt,
             LocalDateTime deletedAt
@@ -35,6 +39,7 @@ public class UserDTO {
         this.password = password;
         this.address = address;
         this.active = active;
+        this.userType = userType;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -130,5 +135,13 @@ public class UserDTO {
 
     public void setDeletedAt(LocalDateTime deletedAt) {
         this.deletedAt = deletedAt;
+    }
+
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
     }
 }

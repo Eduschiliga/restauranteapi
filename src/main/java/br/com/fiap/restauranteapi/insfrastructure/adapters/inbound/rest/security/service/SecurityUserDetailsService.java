@@ -1,12 +1,12 @@
 package br.com.fiap.restauranteapi.insfrastructure.adapters.inbound.rest.security.service;
 
+import br.com.fiap.restauranteapi.application.domain.user.User;
 import br.com.fiap.restauranteapi.application.ports.outbound.repository.UserRepository;
+import br.com.fiap.restauranteapi.insfrastructure.adapters.inbound.rest.security.model.CustomUserDetails; // Importe a nova classe
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 
 @Service
 public class SecurityUserDetailsService implements UserDetailsService {
@@ -18,14 +18,9 @@ public class SecurityUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        var user = userRepository.findByLogin(login)
-                .orElseThrow(() -> new UsernameNotFoundException("User Login not found"));
+        User user = userRepository.findByLogin(login)
+                .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
 
-        // Adaptamos o User do domínio para o User do Spring Security
-        return new org.springframework.security.core.userdetails.User(
-                user.getLogin(),
-                user.getPassword(),
-                new ArrayList<>() // Aqui iriam as Roles/Authorities
-        );
+        return new CustomUserDetails(user);
     }
 }

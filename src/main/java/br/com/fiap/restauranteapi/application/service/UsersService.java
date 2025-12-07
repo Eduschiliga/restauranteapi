@@ -71,7 +71,8 @@ public class UsersService implements
                 createUserInput.email(),
                 createUserInput.login(),
                 encodedPassword,
-                address
+                address,
+                createUserInput.userType()
         );
 
         User createdUser = userRepository.create(newUser);

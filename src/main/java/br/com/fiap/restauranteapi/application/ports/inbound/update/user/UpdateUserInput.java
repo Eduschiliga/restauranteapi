@@ -1,5 +1,6 @@
 package br.com.fiap.restauranteapi.application.ports.inbound.update.user;
 
+import br.com.fiap.restauranteapi.application.domain.user.UserType;
 import br.com.fiap.restauranteapi.application.ports.inbound.update.address.UpdateAddressInput;
 
 public record UpdateUserInput(
@@ -9,7 +10,8 @@ public record UpdateUserInput(
         String email,
         String password,
         UpdateAddressInput address,
-        Boolean active
+        Boolean active,
+        UserType userType
 ) {
 
 }

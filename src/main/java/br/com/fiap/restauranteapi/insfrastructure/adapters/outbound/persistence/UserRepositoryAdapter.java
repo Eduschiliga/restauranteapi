@@ -26,8 +26,8 @@ public class UserRepositoryAdapter implements UserRepository {
         return save(user);
     }
 
-    private User save(final User category) {
-        return userJPARepository.save(UserJPAEntity.of(category)).toUser();
+    private User save(final User user) {
+        return userJPARepository.save(UserJPAEntity.of(user)).toUser();
     }
 
     @Override

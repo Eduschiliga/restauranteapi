@@ -1,6 +1,8 @@
 package br.com.fiap.restauranteapi.insfrastructure.adapters.inbound.rest.model.dto.create;
 
 
+import br.com.fiap.restauranteapi.application.domain.user.UserType;
+
 import java.time.LocalDateTime;
 
 public class CreateUserDTO {
@@ -9,6 +11,7 @@ public class CreateUserDTO {
     private String login;
     private String password;
     private CreateAddressDTO address;
+    private UserType userType;
     private Boolean active;
 
     public CreateUserDTO(
@@ -17,6 +20,7 @@ public class CreateUserDTO {
             String login,
             String password,
             CreateAddressDTO address,
+            UserType userType,
             Boolean active
     ) {
         this.name = name;
@@ -24,6 +28,7 @@ public class CreateUserDTO {
         this.login = login;
         this.password = password;
         this.address = address;
+        this.userType = userType;
         this.active = active;
     }
 
@@ -69,5 +74,17 @@ public class CreateUserDTO {
 
     public Boolean getActive() {
         return active;
+    }
+
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 }

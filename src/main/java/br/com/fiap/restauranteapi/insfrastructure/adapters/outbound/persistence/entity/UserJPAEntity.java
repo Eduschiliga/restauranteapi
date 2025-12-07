@@ -3,6 +3,7 @@ package br.com.fiap.restauranteapi.insfrastructure.adapters.outbound.persistence
 
 import br.com.fiap.restauranteapi.application.domain.user.User;
 import br.com.fiap.restauranteapi.application.domain.user.UserId;
+import br.com.fiap.restauranteapi.application.domain.user.UserType;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -27,6 +28,9 @@ public class UserJPAEntity {
 
     @Column(name = "password", nullable = false)
     private String password;
+
+    @Column(name = "user_type", nullable = false)
+    private UserType userType;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "address_id")
@@ -72,6 +76,7 @@ public class UserJPAEntity {
             String login,
             String password,
             AddressJPAEntity address,
+            UserType userType,
             Boolean active,
             LocalDateTime createdAt,
             LocalDateTime updatedAt,
@@ -84,6 +89,7 @@ public class UserJPAEntity {
         this.password = password;
         this.address = address;
         this.active = active;
+        this.userType = userType;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -97,6 +103,7 @@ public class UserJPAEntity {
                 user.getLogin(),
                 user.getPassword(),
                 AddressJPAEntity.of(user.getAddress()),
+                user.getUserType(),
                 user.getActive(),
                 user.getCreatedAt(),
                 user.getUpdatedAt(),
@@ -112,6 +119,7 @@ public class UserJPAEntity {
                 login,
                 password,
                 address != null ? address.toAddress() : null,
+                userType,
                 active,
                 createdAt,
                 updatedAt,
