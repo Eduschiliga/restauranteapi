@@ -34,7 +34,7 @@ public class JwtTokenAdapter implements TokenGateway {
     }
 
     @Override
-    public String validate(String token) {
+    public String getSubjectByToken(String token) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.require(algorithm)

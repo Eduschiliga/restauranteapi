@@ -44,7 +44,7 @@ public class AuthService implements
 
     @Override
     public GetUserByTokenOutput getUserByToken(String token) {
-        String login = tokenGateway.validate(token);
+        String login = tokenGateway.getSubjectByToken(replateBearer(token));
 
         if (login == null || login.isEmpty()) {
             throw new TokenInvalidoException("Token inválido");
@@ -54,5 +54,9 @@ public class AuthService implements
                 .orElseThrow(() -> new UserNotFoundException("Usuário não encontrado com o token informado"));
 
         return GetUserByTokenOutput.from(user);
+    }
+
+    private String replateBearer(String token) {
+        return token.replace("Bearer ", "");
     }
 }

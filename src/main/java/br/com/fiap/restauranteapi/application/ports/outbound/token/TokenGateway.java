@@ -4,5 +4,6 @@ import br.com.fiap.restauranteapi.application.domain.user.User;
 
 public interface TokenGateway {
     String generate(User user);
-    String validate(String token);
+
+    String getSubjectByToken(String token);
 }

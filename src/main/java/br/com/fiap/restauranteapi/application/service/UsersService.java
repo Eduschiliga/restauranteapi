@@ -6,17 +6,16 @@ import br.com.fiap.restauranteapi.application.domain.exceptions.InvalidUserNameE
 import br.com.fiap.restauranteapi.application.domain.exceptions.UserNotFoundException;
 import br.com.fiap.restauranteapi.application.domain.user.User;
 import br.com.fiap.restauranteapi.application.domain.user.UserId;
-import br.com.fiap.restauranteapi.application.ports.inbound.auth.GetUserByTokenOutput;
 import br.com.fiap.restauranteapi.application.ports.inbound.create.ForCreatingUser;
 import br.com.fiap.restauranteapi.application.ports.inbound.create.user.CreateUserInput;
 import br.com.fiap.restauranteapi.application.ports.inbound.create.user.CreateUserOutput;
 import br.com.fiap.restauranteapi.application.ports.inbound.delete.ForDeletingUserById;
 import br.com.fiap.restauranteapi.application.ports.inbound.get.ForGettingUserById;
-import br.com.fiap.restauranteapi.application.ports.inbound.list.ForListingUsersByName;
 import br.com.fiap.restauranteapi.application.ports.inbound.get.GetUserByIdOutput;
-import br.com.fiap.restauranteapi.application.ports.inbound.list.ListUsersByNameOutput;
 import br.com.fiap.restauranteapi.application.ports.inbound.list.ForListingUser;
+import br.com.fiap.restauranteapi.application.ports.inbound.list.ForListingUsersByName;
 import br.com.fiap.restauranteapi.application.ports.inbound.list.ListUserOutput;
+import br.com.fiap.restauranteapi.application.ports.inbound.list.ListUsersByNameOutput;
 import br.com.fiap.restauranteapi.application.ports.inbound.password.ForUpdatingPassword;
 import br.com.fiap.restauranteapi.application.ports.inbound.password.UpdatePasswordInput;
 import br.com.fiap.restauranteapi.application.ports.inbound.password.UpdatePasswordOutput;
@@ -27,7 +26,6 @@ import br.com.fiap.restauranteapi.application.ports.outbound.password.PasswordEn
 import br.com.fiap.restauranteapi.application.ports.outbound.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -175,19 +173,7 @@ public class UsersService implements
 
     @Override
     public UpdatePasswordOutput updatePassword(UpdatePasswordInput input) {
-        GetUserByTokenOutput userOutput = input.user();
-        User user = User.with(
-                userOutput.userId(),
-                userOutput.name(),
-                userOutput.email(),
-                userOutput.login(),
-                userOutput.password(),
-                userOutput.address(),
-                userOutput.active(),
-                userOutput.createdAt(),
-                userOutput.updatedAt(),
-                userOutput.deletedAt()
-        );
+        User user = findUserByIdDomain(input.userId());
 
         String actualPassword = user.getPassword();
         boolean matchPassword = passwordEncoder.matches(input.oldPassword(), actualPassword);

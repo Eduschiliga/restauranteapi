@@ -1,7 +1,6 @@
 package br.com.fiap.restauranteapi.insfrastructure.adapters.inbound.rest.mapper;
 
 import br.com.fiap.restauranteapi.application.domain.address.AddressId;
-import br.com.fiap.restauranteapi.application.domain.user.User;
 import br.com.fiap.restauranteapi.application.domain.user.UserId;
 import br.com.fiap.restauranteapi.application.ports.inbound.auth.GetUserByTokenOutput;
 import br.com.fiap.restauranteapi.application.ports.inbound.create.user.CreateUserInput;
@@ -50,6 +49,6 @@ public interface UserMapper {
         return value != null ? AddressId.from(value) : null;
     }
 
-    @Mapping(target = "user", expression = "java(user)")
+    @Mapping(target = "userId", source = "user.userId.value")
     UpdatePasswordInput fromUpdatePasswordDTO(UpdatePasswordDTO updatePasswordDto, GetUserByTokenOutput user);
 }
