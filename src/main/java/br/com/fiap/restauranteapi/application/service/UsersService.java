@@ -1,14 +1,18 @@
 package br.com.fiap.restauranteapi.application.service;
 
 import br.com.fiap.restauranteapi.application.domain.address.Address;
+import br.com.fiap.restauranteapi.application.domain.exceptions.InvalidUserNameException;
+import br.com.fiap.restauranteapi.application.domain.exceptions.UserNotFoundException;
 import br.com.fiap.restauranteapi.application.domain.user.User;
 import br.com.fiap.restauranteapi.application.domain.user.UserId;
+import br.com.fiap.restauranteapi.application.ports.inbound.create.ForCreatingUser;
 import br.com.fiap.restauranteapi.application.ports.inbound.create.user.CreateUserInput;
 import br.com.fiap.restauranteapi.application.ports.inbound.create.user.CreateUserOutput;
-import br.com.fiap.restauranteapi.application.ports.inbound.create.ForCreatingUser;
 import br.com.fiap.restauranteapi.application.ports.inbound.delete.ForDeletingUserById;
 import br.com.fiap.restauranteapi.application.ports.inbound.get.ForGettingUserById;
+import br.com.fiap.restauranteapi.application.ports.inbound.list.ForListingUsersByName;
 import br.com.fiap.restauranteapi.application.ports.inbound.get.GetUserByIdOutput;
+import br.com.fiap.restauranteapi.application.ports.inbound.list.ListUsersByNameOutput;
 import br.com.fiap.restauranteapi.application.ports.inbound.list.ForListingUser;
 import br.com.fiap.restauranteapi.application.ports.inbound.list.ListUserOutput;
 import br.com.fiap.restauranteapi.application.ports.inbound.update.ForUpdatingUser;
@@ -23,17 +27,18 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
-public class UserService implements
+public class UsersService implements
         ForCreatingUser,
         ForUpdatingUser,
         ForDeletingUserById,
         ForGettingUserById,
-        ForListingUser {
+        ForListingUser,
+        ForListingUsersByName {
 
     private final PasswordEncoderPort passwordEncoder;
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository, PasswordEncoderPort passwordEncoder) {
+    public UsersService(UserRepository userRepository, PasswordEncoderPort passwordEncoder) {
         this.userRepository = Objects.requireNonNull(userRepository);
         this.passwordEncoder = Objects.requireNonNull(passwordEncoder);
     }
@@ -85,7 +90,7 @@ public class UserService implements
         UserId userId = UserId.from(inputId);
 
         return userRepository.findById(userId).orElseThrow(
-                () -> new IllegalArgumentException("User with ID %s not found.".formatted(inputId))
+                () -> new UserNotFoundException("User with ID %s not found.".formatted(inputId))
         );
     }
 
@@ -141,5 +146,22 @@ public class UserService implements
         user = userRepository.update(user);
 
         return UpdateUserOutput.from(user);
+    }
+
+    @Override
+    public List<ListUsersByNameOutput> findAllByName(String name) {
+        validateUserName(name);
+
+        return userRepository
+                .findAllByName(name)
+                .stream()
+                .map(ListUsersByNameOutput::from)
+                .collect(Collectors.toList());
+    }
+
+    private void validateUserName(String name) {
+        if (name == null || name.isBlank()) {
+            throw new InvalidUserNameException("Name cannot be null or blank.");
+        }
     }
 }

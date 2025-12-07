@@ -52,7 +52,18 @@ public class User {
             LocalDateTime updatedAt,
             LocalDateTime deletedAt
     ) {
-        return new User(userId, name, email, login, password, address, active, createdAt, updatedAt, deletedAt);
+        return new User(
+                userId,
+                name,
+                email,
+                login,
+                password,
+                address,
+                active,
+                createdAt,
+                updatedAt,
+                deletedAt
+        );
     }
 
     public static User newUser(

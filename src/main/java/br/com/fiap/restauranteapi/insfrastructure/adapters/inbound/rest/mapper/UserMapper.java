@@ -6,6 +6,7 @@ import br.com.fiap.restauranteapi.application.ports.inbound.create.user.CreateUs
 import br.com.fiap.restauranteapi.application.ports.inbound.create.user.CreateUserOutput;
 import br.com.fiap.restauranteapi.application.ports.inbound.get.GetUserByIdOutput;
 import br.com.fiap.restauranteapi.application.ports.inbound.list.ListUserOutput;
+import br.com.fiap.restauranteapi.application.ports.inbound.list.ListUsersByNameOutput;
 import br.com.fiap.restauranteapi.application.ports.inbound.update.user.UpdateUserInput;
 import br.com.fiap.restauranteapi.application.ports.inbound.update.user.UpdateUserOutput;
 import br.com.fiap.restauranteapi.insfrastructure.adapters.inbound.rest.model.dto.UserDTO;
@@ -21,6 +22,7 @@ public interface UserMapper {
     UserDTO toDTO(UpdateUserOutput output);
     UserDTO toDTO(GetUserByIdOutput output);
     List<UserDTO> toDTO(List<ListUserOutput> output);
+    List<UserDTO> toListDTO(List<ListUsersByNameOutput> output);
 
     CreateUserInput fromDTO(CreateUserDTO dto);
     UpdateUserInput fromUpdateDTO(UpdateUserDTO dto);

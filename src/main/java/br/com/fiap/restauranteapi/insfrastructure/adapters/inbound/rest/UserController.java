@@ -6,8 +6,10 @@ import br.com.fiap.restauranteapi.application.ports.inbound.create.ForCreatingUs
 import br.com.fiap.restauranteapi.application.ports.inbound.delete.ForDeletingUserById;
 import br.com.fiap.restauranteapi.application.ports.inbound.get.ForGettingUserById;
 import br.com.fiap.restauranteapi.application.ports.inbound.get.GetUserByIdOutput;
+import br.com.fiap.restauranteapi.application.ports.inbound.list.ForListingUsersByName;
 import br.com.fiap.restauranteapi.application.ports.inbound.list.ForListingUser;
 import br.com.fiap.restauranteapi.application.ports.inbound.list.ListUserOutput;
+import br.com.fiap.restauranteapi.application.ports.inbound.list.ListUsersByNameOutput;
 import br.com.fiap.restauranteapi.application.ports.inbound.update.ForUpdatingUser;
 import br.com.fiap.restauranteapi.application.ports.inbound.update.user.UpdateUserInput;
 import br.com.fiap.restauranteapi.application.ports.inbound.update.user.UpdateUserOutput;
@@ -15,6 +17,8 @@ import br.com.fiap.restauranteapi.insfrastructure.adapters.inbound.rest.mapper.U
 import br.com.fiap.restauranteapi.insfrastructure.adapters.inbound.rest.model.dto.UserDTO;
 import br.com.fiap.restauranteapi.insfrastructure.adapters.inbound.rest.model.dto.create.CreateUserDTO;
 import br.com.fiap.restauranteapi.insfrastructure.adapters.inbound.rest.model.dto.update.UpdateUserDTO;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +33,7 @@ public class UserController {
     private final ForUpdatingUser forUpdatingUser;
     private final ForDeletingUserById forDeletingUserById;
     private final ForListingUser forListingUser;
+    private final ForListingUsersByName forListingsUsersByName;
     private final ForGettingUserById forGettingUserById;
     private final UserMapper userMapper;
 
@@ -38,6 +43,7 @@ public class UserController {
             ForDeletingUserById forDeletingUserById,
             ForListingUser forListingUser,
             ForGettingUserById forGettingUserById,
+            ForListingUsersByName forListingsUsersByName,
             UserMapper userMapper
     ) {
         this.forCreatingUser = forCreatingUser;
@@ -45,6 +51,7 @@ public class UserController {
         this.forDeletingUserById = forDeletingUserById;
         this.forListingUser = forListingUser;
         this.forGettingUserById = forGettingUserById;
+        this.forListingsUsersByName = forListingsUsersByName;
         this.userMapper = userMapper;
     }
 
@@ -87,6 +94,16 @@ public class UserController {
     public ResponseEntity<List<UserDTO>> listUsers() {
         List<ListUserOutput> userOutputList = forListingUser.listUers();
         List<UserDTO> userList = userMapper.toDTO(userOutputList);
+        return ResponseEntity.ok().body(userList);
+    }
+
+    @GetMapping("search")
+    public ResponseEntity<List<UserDTO>> listUsersByName(
+            @RequestParam(required = true) @NotNull @NotBlank String name
+    ) {
+        List<ListUsersByNameOutput> userOutputList = forListingsUsersByName.findAllByName(name);
+        List<UserDTO> userList = userMapper.toListDTO(userOutputList);
+
         return ResponseEntity.ok().body(userList);
     }
 

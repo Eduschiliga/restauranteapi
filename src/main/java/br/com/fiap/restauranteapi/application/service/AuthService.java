@@ -1,5 +1,8 @@
 package br.com.fiap.restauranteapi.application.service;
 
+import br.com.fiap.restauranteapi.application.domain.exceptions.TokenInvalidoException;
+import br.com.fiap.restauranteapi.application.domain.exceptions.UserNotFoundException;
+import br.com.fiap.restauranteapi.application.domain.exceptions.UsuarioOuSenhaInvalidoException;
 import br.com.fiap.restauranteapi.application.domain.user.User;
 import br.com.fiap.restauranteapi.application.ports.inbound.auth.ForAuthenticatingUser;
 import br.com.fiap.restauranteapi.application.ports.inbound.auth.LoginInput;
@@ -26,14 +29,12 @@ public class AuthService implements ForAuthenticatingUser {
     @Override
     public LoginOutput login(LoginInput input) {
         User user = userRepository.findByLogin(input.login())
-                .orElseThrow(() -> new IllegalArgumentException("Usuário ou senha inválidos"));
+                .orElseThrow(() -> new UsuarioOuSenhaInvalidoException("Usuário ou senha inválidos"));
 
-        // 2. Verifica a senha (usando a porta de saída)
         if (!passwordEncoder.matches(input.password(), user.getPassword())) {
-            throw new IllegalArgumentException("Usuário ou senha inválidos");
+            throw new UsuarioOuSenhaInvalidoException("Usuário ou senha inválidos");
         }
 
-        // 3. Gera o token (usando a porta de saída)
         String token = tokenGateway.generate(user);
 
         return new LoginOutput(token);
@@ -41,14 +42,13 @@ public class AuthService implements ForAuthenticatingUser {
 
     @Override
     public User validateToken(String token) {
-        // 1. Valida a assinatura do token e extrai o login (via Output Port)
         String login = tokenGateway.validate(token);
 
         if (login == null || login.isEmpty()) {
-            return null;
+            throw new TokenInvalidoException("Token inválido");
         }
 
-        // 2. Recupera o usuário do banco (via Output Port)
-        return userRepository.findByLogin(login).orElse(null);
+        return userRepository.findByLogin(login)
+                .orElseThrow(() -> new UserNotFoundException("Usuário não encontrado com o token informado"));
     }
 }

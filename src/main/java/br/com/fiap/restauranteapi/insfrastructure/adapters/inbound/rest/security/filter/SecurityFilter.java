@@ -1,5 +1,6 @@
 package br.com.fiap.restauranteapi.insfrastructure.adapters.inbound.rest.security.filter;
 
+import br.com.fiap.restauranteapi.application.domain.exceptions.TokenInvalidoException;
 import br.com.fiap.restauranteapi.application.domain.user.User;
 import br.com.fiap.restauranteapi.application.ports.inbound.auth.ForAuthenticatingUser;
 import jakarta.servlet.FilterChain;
@@ -23,19 +24,25 @@ public class SecurityFilter extends OncePerRequestFilter {
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            FilterChain filterChain
+    ) throws ServletException, IOException {
         var token = this.recoverToken(request);
 
-        if (token != null) {
-            // Chamamos o caso de uso para validar e obter o usuário
+        if (token != null && !token.isBlank()) {
             User user = forAuthenticatingUser.validateToken(token);
 
             if (user != null) {
-                // Criamos a autenticação do Spring Security
-                // Obs: Aqui adaptamos o "User" do Domínio para o contexto do Spring
-                var authentication = new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
+                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                        user,
+                        null,
+                        new ArrayList<>()
+                );
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);
+
             }
         }
 

@@ -12,6 +12,7 @@ public interface UserRepository {
     User update(User aUser);
 
     Optional<User> findById(UserId anId);
+    List<User> findAllByName(String name);
 
     List<User> findAll();
 

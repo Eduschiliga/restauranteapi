@@ -42,6 +42,11 @@ public class UserRepositoryAdapter implements UserRepository {
     }
 
     @Override
+    public List<User> findAllByName(String name) {
+        return userJPARepository.findAllByName(name).stream().map(UserJPAEntity::toUser).toList();
+    }
+
+    @Override
     public List<User> findAll() {
         return userJPARepository.findAll().stream().map(UserJPAEntity::toUser).toList();
     }
