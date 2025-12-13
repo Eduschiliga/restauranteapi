@@ -1,0 +1,61 @@
+openapi: 3.0.3
+info:
+  title: Restaurante API
+  description: >
+    API para gestão de restaurantes e clientes, permitindo cadastro, autenticação
+    e gerenciamento de usuários e endereços.
+  version: '1.0.0'
+servers:
+  - url: http://localhost:8080
+    description: Local Server
+tags:
+  - name: Auth
+    description: Operações de autenticação
+  - name: Users
+    description: Operações relacionadas à gestão de usuários
+paths:
+  /api/auth/login:
+    post:
+      tags:
+        - Auth
+      summary: Realizar login
+      operationId: login
+      requestBody:
+        description: Credenciais de login
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+      responses:
+        '200':
+          description: Login realizado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    Login:
+      type: object
+      properties:
+        login:
+          type: string
+        password:
+          type: string
+      required:
+        - login
+        - password
+    Token:
+      type: object
+      properties:
+        token:
+          type: string
