@@ -36,10 +36,10 @@ public class AuthService implements
     @Override
     public LoginOutput login(LoginInput input) {
         User user = userRepository.findByLogin(input.login())
-                .orElseThrow(() -> new UsuarioOuSenhaInvalidoException("Usuário ou senha inválidos"));
+                .orElseThrow(() -> new UsuarioOuSenhaInvalidoException("Invalid username or password"));
 
         if (!passwordEncoder.matches(input.password(), user.getPassword())) {
-            throw new UsuarioOuSenhaInvalidoException("Usuário ou senha inválidos");
+            throw new UsuarioOuSenhaInvalidoException("Invalid username or password");
         }
 
         String token = tokenGateway.generate(user);

@@ -23,6 +23,7 @@ import br.com.fiap.restaurant.model.CreateUserDTO;
 import br.com.fiap.restaurant.model.UpdatePasswordDTO;
 import br.com.fiap.restaurant.model.UpdateUserDTO;
 import br.com.fiap.restaurant.model.UserDTO;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -68,7 +69,7 @@ public class UserController implements UsersApi {
     }
 
     @Override
-    public ResponseEntity<UserDTO> createUser(CreateUserDTO createUserDTO) {
+    public ResponseEntity<UserDTO> createUser(@Valid @RequestBody CreateUserDTO createUserDTO) {
         CreateUserInput useCaseInput = userMapper.fromDTO(createUserDTO);
         CreateUserOutput useCaseOutput = forCreatingUser.create(useCaseInput);
 
@@ -77,9 +78,7 @@ public class UserController implements UsersApi {
     }
 
     @Override
-    public ResponseEntity<UserDTO> updateUser(
-            @RequestBody UpdateUserDTO userDTO
-    ) {
+    public ResponseEntity<UserDTO> updateUser(@Valid @RequestBody UpdateUserDTO userDTO) {
         String userId = getAuthenticatedUserId();
 
         UpdateUserInput useCaseInput = userMapper.fromUpdateDTO(userDTO, userId);
@@ -109,9 +108,7 @@ public class UserController implements UsersApi {
     }
 
     @Override
-    public ResponseEntity<List<UserDTO>> listUsersByName(
-            @RequestParam String name
-    ) {
+    public ResponseEntity<List<UserDTO>> listUsersByName(@RequestParam String name) {
         List<ListUsersByNameOutput> userOutputList = forListingsUsersByName.findAllByName(name);
         List<UserDTO> userList = userMapper.toListDTO(userOutputList);
 

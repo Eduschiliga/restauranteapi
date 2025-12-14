@@ -303,14 +303,22 @@ components:
       properties:
         name:
           type: string
+          minLength: 1
+          maxLength: 255
         email:
           type: string
           format: email
+          minLength: 1
+          maxLength: 255
         login:
           type: string
+          minLength: 1
+          maxLength: 255
         password:
           type: string
           writeOnly: true
+          minLength: 6
+          maxLength: 12
         address:
           $ref: '#/components/schemas/CreateAddress'
         userType:
@@ -318,6 +326,7 @@ components:
         active:
           type: boolean
           default: true
+
       required:
         - name
         - email
@@ -331,11 +340,17 @@ components:
       properties:
         name:
           type: string
+          minLength: 1
+          maxLength: 255
         email:
           type: string
           format: email
+          minLength: 1
+          maxLength: 255
         login:
           type: string
+          minLength: 1
+          maxLength: 255
         address:
           $ref: '#/components/schemas/UpdateAddress'
         active:
@@ -343,15 +358,23 @@ components:
         userType:
           $ref: '#/components/schemas/UserType'
       required:
-        - userId
+        - name
+        - email
+        - login
+        - active
+        - userType
 
     UpdatePassword:
       type: object
       properties:
         newPassword:
           type: string
+          minLength: 6
+          maxLength: 12
         oldPassword:
           type: string
+          minLength: 6
+          maxLength: 12
       required:
         - newPassword
         - oldPassword
