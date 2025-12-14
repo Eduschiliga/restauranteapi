@@ -9,10 +9,10 @@
         <relativePath/>
     </parent>
     <groupId>br.com.fiap</groupId>
-    <artifactId>restauranteapi</artifactId>
+    <artifactId>restaurant</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>restauranteapi</name>
-    <description>restauranteapi</description>
+    <name>restaurant</name>
+    <description>restaurant</description>
     <url/>
     <licenses>
         <license/>
@@ -145,8 +145,8 @@
                         <configuration>
                             <inputSpec>${project.basedir}/src/main/resources/api/openapi.yml</inputSpec>
                             <generatorName>spring</generatorName>
-                            <apiPackage>br.com.fiap.restauranteapi.api</apiPackage>
-                            <modelPackage>br.com.fiap.restauranteapi.model</modelPackage>
+                            <apiPackage>br.com.fiap.restaurant.api</apiPackage>
+                            <modelPackage>br.com.fiap.restaurant.model</modelPackage>
                             <modelNameSuffix>DTO</modelNameSuffix>
                             <configOptions>
                                 <interfaceOnly>true</interfaceOnly>
