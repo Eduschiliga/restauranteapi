@@ -1,7 +1,7 @@
 package br.com.fiap.restaurant.application.ports.inbound.user.update.address;
 
-import br.com.fiap.restaurant.domain.address.Address;
-import br.com.fiap.restaurant.domain.address.AddressId;
+import br.com.fiap.restaurant.application.domain.address.Address;
+import br.com.fiap.restaurant.application.domain.address.AddressId;
 
 import java.time.LocalDateTime;
 

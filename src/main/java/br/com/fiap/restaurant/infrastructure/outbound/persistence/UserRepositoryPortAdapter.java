@@ -1,11 +1,10 @@
 package br.com.fiap.restaurant.infrastructure.outbound.persistence;
 
-import br.com.fiap.restaurant.domain.user.User;
-import br.com.fiap.restaurant.domain.user.UserId;
+import br.com.fiap.restaurant.application.domain.user.User;
+import br.com.fiap.restaurant.application.domain.user.UserId;
 import br.com.fiap.restaurant.application.ports.outbound.repository.UserRepositoryPort;
 import br.com.fiap.restaurant.infrastructure.outbound.persistence.entity.UserJPAEntity;
 import br.com.fiap.restaurant.infrastructure.outbound.persistence.repository.UserJPARepository;
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

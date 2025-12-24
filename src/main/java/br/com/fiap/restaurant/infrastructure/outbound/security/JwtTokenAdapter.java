@@ -1,6 +1,6 @@
 package br.com.fiap.restaurant.infrastructure.outbound.security;
 
-import br.com.fiap.restaurant.domain.user.User;
+import br.com.fiap.restaurant.application.domain.user.User;
 import br.com.fiap.restaurant.application.ports.outbound.token.TokenGeneratorPort;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;

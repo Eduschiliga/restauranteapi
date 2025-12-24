@@ -1,9 +1,9 @@
 package br.com.fiap.restaurant.application.ports.inbound.user.password.output;
 
-import br.com.fiap.restaurant.domain.address.Address;
-import br.com.fiap.restaurant.domain.user.User;
-import br.com.fiap.restaurant.domain.user.UserId;
-import br.com.fiap.restaurant.domain.user.UserType;
+import br.com.fiap.restaurant.application.domain.address.Address;
+import br.com.fiap.restaurant.application.domain.user.User;
+import br.com.fiap.restaurant.application.domain.user.UserId;
+import br.com.fiap.restaurant.application.domain.user.UserType;
 
 import java.time.LocalDateTime;
 

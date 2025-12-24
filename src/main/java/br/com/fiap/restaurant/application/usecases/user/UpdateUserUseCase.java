@@ -1,7 +1,7 @@
 package br.com.fiap.restaurant.application.usecases.user;
 
-import br.com.fiap.restaurant.domain.address.Address;
-import br.com.fiap.restaurant.domain.user.User;
+import br.com.fiap.restaurant.application.domain.address.Address;
+import br.com.fiap.restaurant.application.domain.user.User;
 import br.com.fiap.restaurant.application.ports.inbound.user.update.UpdateUserInputPort;
 import br.com.fiap.restaurant.application.ports.inbound.user.update.user.UpdateUserInput;
 import br.com.fiap.restaurant.application.ports.inbound.user.update.user.UpdateUserOutput;

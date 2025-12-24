@@ -1,7 +1,7 @@
 package br.com.fiap.restaurant.application.ports.outbound.repository;
 
-import br.com.fiap.restaurant.domain.user.User;
-import br.com.fiap.restaurant.domain.user.UserId;
+import br.com.fiap.restaurant.application.domain.user.User;
+import br.com.fiap.restaurant.application.domain.user.UserId;
 
 import java.util.List;
 import java.util.Optional;

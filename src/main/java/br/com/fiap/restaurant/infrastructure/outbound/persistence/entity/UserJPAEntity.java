@@ -1,9 +1,9 @@
 package br.com.fiap.restaurant.infrastructure.outbound.persistence.entity;
 
 
-import br.com.fiap.restaurant.domain.user.User;
-import br.com.fiap.restaurant.domain.user.UserId;
-import br.com.fiap.restaurant.domain.user.UserType;
+import br.com.fiap.restaurant.application.domain.user.User;
+import br.com.fiap.restaurant.application.domain.user.UserId;
+import br.com.fiap.restaurant.application.domain.user.UserType;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;

@@ -1,6 +1,6 @@
 package br.com.fiap.restaurant.application.ports.inbound.user.update.address;
 
-import br.com.fiap.restaurant.domain.address.AddressId;
+import br.com.fiap.restaurant.application.domain.address.AddressId;
 
 public record UpdateAddressInput(
         AddressId addressId,

@@ -9,8 +9,8 @@ import br.com.fiap.restaurant.application.ports.inbound.user.password.input.Upda
 import br.com.fiap.restaurant.application.ports.inbound.user.password.output.UpdatePasswordOutput;
 import br.com.fiap.restaurant.application.ports.inbound.user.update.user.UpdateUserInput;
 import br.com.fiap.restaurant.application.ports.inbound.user.update.user.UpdateUserOutput;
-import br.com.fiap.restaurant.domain.address.AddressId;
-import br.com.fiap.restaurant.domain.user.UserId;
+import br.com.fiap.restaurant.application.domain.address.AddressId;
+import br.com.fiap.restaurant.application.domain.user.UserId;
 import br.com.fiap.restaurant.model.CreateUserDTO;
 import br.com.fiap.restaurant.model.UpdatePasswordDTO;
 import br.com.fiap.restaurant.model.UpdateUserDTO;

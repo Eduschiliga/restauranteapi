@@ -1,6 +1,6 @@
 package br.com.fiap.restaurant.infrastructure.inbound.rest.exceptions.handler;
 
-import br.com.fiap.restaurant.domain.exceptions.*;
+import br.com.fiap.restaurant.application.domain.exceptions.*;
 import org.springframework.http.*;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;

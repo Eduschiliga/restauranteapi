@@ -1,6 +1,6 @@
 package br.com.fiap.restaurant.infrastructure.inbound.security.model;
 
-import br.com.fiap.restaurant.domain.user.UserType;
+import br.com.fiap.restaurant.application.domain.user.UserType;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

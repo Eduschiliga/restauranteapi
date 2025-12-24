@@ -5,8 +5,8 @@ import br.com.fiap.restaurant.application.ports.inbound.user.password.ForUpdatin
 import br.com.fiap.restaurant.application.ports.inbound.user.password.output.UpdatePasswordOutput;
 import br.com.fiap.restaurant.application.ports.outbound.password.PasswordEncoderPort;
 import br.com.fiap.restaurant.application.ports.outbound.repository.UserRepositoryPort;
-import br.com.fiap.restaurant.domain.exceptions.InvalidPasswordException;
-import br.com.fiap.restaurant.domain.user.User;
+import br.com.fiap.restaurant.application.domain.exceptions.InvalidPasswordException;
+import br.com.fiap.restaurant.application.domain.user.User;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.transaction.Transactional;

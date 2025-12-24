@@ -1,6 +1,6 @@
-package br.com.fiap.restaurant.domain.user;
+package br.com.fiap.restaurant.application.domain.user;
 
-import br.com.fiap.restaurant.domain.address.Address;
+import br.com.fiap.restaurant.application.domain.address.Address;
 
 import java.time.LocalDateTime;
 

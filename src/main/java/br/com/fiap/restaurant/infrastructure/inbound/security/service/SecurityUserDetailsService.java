@@ -1,8 +1,8 @@
 package br.com.fiap.restaurant.infrastructure.inbound.security.service;
 
-import br.com.fiap.restaurant.domain.user.User;
+import br.com.fiap.restaurant.application.domain.user.User;
 import br.com.fiap.restaurant.application.ports.outbound.repository.UserRepositoryPort;
-import br.com.fiap.restaurant.domain.address.Address;
+import br.com.fiap.restaurant.application.domain.address.Address;
 import br.com.fiap.restaurant.infrastructure.inbound.security.model.AddressDetails;
 import br.com.fiap.restaurant.infrastructure.inbound.security.model.UserDetailsImpl;
 import org.springframework.security.core.userdetails.UserDetails;

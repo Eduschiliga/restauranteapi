@@ -4,11 +4,11 @@ import br.com.fiap.restaurant.application.ports.inbound.user.password.input.Upda
 import br.com.fiap.restaurant.application.ports.inbound.user.password.output.UpdatePasswordOutput;
 import br.com.fiap.restaurant.application.ports.outbound.password.PasswordEncoderPort;
 import br.com.fiap.restaurant.application.ports.outbound.repository.UserRepositoryPort;
-import br.com.fiap.restaurant.domain.exceptions.InvalidPasswordException;
-import br.com.fiap.restaurant.domain.exceptions.UserNotFoundException;
-import br.com.fiap.restaurant.domain.user.User;
-import br.com.fiap.restaurant.domain.user.UserId;
-import br.com.fiap.restaurant.domain.user.UserType;
+import br.com.fiap.restaurant.application.domain.exceptions.InvalidPasswordException;
+import br.com.fiap.restaurant.application.domain.exceptions.UserNotFoundException;
+import br.com.fiap.restaurant.application.domain.user.User;
+import br.com.fiap.restaurant.application.domain.user.UserId;
+import br.com.fiap.restaurant.application.domain.user.UserType;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

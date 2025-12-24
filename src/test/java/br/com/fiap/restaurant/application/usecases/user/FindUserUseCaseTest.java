@@ -4,10 +4,10 @@ import br.com.fiap.restaurant.application.ports.inbound.user.get.output.GetUserB
 import br.com.fiap.restaurant.application.ports.inbound.user.list.output.ListUserOutput;
 import br.com.fiap.restaurant.application.ports.inbound.user.list.output.ListUsersByNameOutput;
 import br.com.fiap.restaurant.application.ports.outbound.repository.UserRepositoryPort;
-import br.com.fiap.restaurant.domain.exceptions.UserNotFoundException;
-import br.com.fiap.restaurant.domain.user.User;
-import br.com.fiap.restaurant.domain.user.UserId;
-import br.com.fiap.restaurant.domain.user.UserType;
+import br.com.fiap.restaurant.application.domain.exceptions.UserNotFoundException;
+import br.com.fiap.restaurant.application.domain.user.User;
+import br.com.fiap.restaurant.application.domain.user.UserId;
+import br.com.fiap.restaurant.application.domain.user.UserType;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

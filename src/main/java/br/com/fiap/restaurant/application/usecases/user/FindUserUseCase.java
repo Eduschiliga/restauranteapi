@@ -1,8 +1,8 @@
 package br.com.fiap.restaurant.application.usecases.user;
 
-import br.com.fiap.restaurant.domain.exceptions.UserNotFoundException;
-import br.com.fiap.restaurant.domain.user.User;
-import br.com.fiap.restaurant.domain.user.UserId;
+import br.com.fiap.restaurant.application.domain.exceptions.UserNotFoundException;
+import br.com.fiap.restaurant.application.domain.user.User;
+import br.com.fiap.restaurant.application.domain.user.UserId;
 import br.com.fiap.restaurant.application.ports.inbound.user.get.ForGettingUserById;
 import br.com.fiap.restaurant.application.ports.inbound.user.get.ForGettingUserDomainById;
 import br.com.fiap.restaurant.application.ports.inbound.user.get.output.GetUserByIdOutput;

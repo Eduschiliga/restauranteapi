@@ -1,7 +1,7 @@
 package br.com.fiap.restaurant.application.usecases.user;
 
-import br.com.fiap.restaurant.domain.user.User;
-import br.com.fiap.restaurant.domain.user.UserId;
+import br.com.fiap.restaurant.application.domain.user.User;
+import br.com.fiap.restaurant.application.domain.user.UserId;
 import br.com.fiap.restaurant.application.ports.inbound.user.delete.ForDeletingUserById;
 import br.com.fiap.restaurant.application.ports.outbound.repository.UserRepositoryPort;
 import jakarta.inject.Inject;

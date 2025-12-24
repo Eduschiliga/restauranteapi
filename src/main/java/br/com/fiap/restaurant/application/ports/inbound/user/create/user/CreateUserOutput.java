@@ -1,8 +1,8 @@
 package br.com.fiap.restaurant.application.ports.inbound.user.create.user;
 
-import br.com.fiap.restaurant.domain.user.User;
-import br.com.fiap.restaurant.domain.user.UserId;
-import br.com.fiap.restaurant.domain.user.UserType;
+import br.com.fiap.restaurant.application.domain.user.User;
+import br.com.fiap.restaurant.application.domain.user.UserId;
+import br.com.fiap.restaurant.application.domain.user.UserType;
 import br.com.fiap.restaurant.application.ports.inbound.user.create.address.CreateAddressOutput;
 
 import java.time.LocalDateTime;

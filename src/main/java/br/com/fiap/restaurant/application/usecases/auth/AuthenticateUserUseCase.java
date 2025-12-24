@@ -5,10 +5,10 @@ import br.com.fiap.restaurant.application.ports.inbound.auth.output.Authenticate
 import br.com.fiap.restaurant.application.ports.inbound.auth.output.GetUserByTokenOutput;
 import br.com.fiap.restaurant.application.ports.inbound.auth.ForAuthenticateUser;
 import br.com.fiap.restaurant.application.ports.inbound.auth.ForGettingUserByToken;
-import br.com.fiap.restaurant.domain.exceptions.TokenInvalidoException;
-import br.com.fiap.restaurant.domain.exceptions.UserNotFoundException;
-import br.com.fiap.restaurant.domain.exceptions.UsuarioOuSenhaInvalidoException;
-import br.com.fiap.restaurant.domain.user.User;
+import br.com.fiap.restaurant.application.domain.exceptions.TokenInvalidoException;
+import br.com.fiap.restaurant.application.domain.exceptions.UserNotFoundException;
+import br.com.fiap.restaurant.application.domain.exceptions.UsuarioOuSenhaInvalidoException;
+import br.com.fiap.restaurant.application.domain.user.User;
 import br.com.fiap.restaurant.application.ports.outbound.password.PasswordEncoderPort;
 import br.com.fiap.restaurant.application.ports.outbound.repository.UserRepositoryPort;
 import br.com.fiap.restaurant.application.ports.outbound.token.TokenGeneratorPort;
